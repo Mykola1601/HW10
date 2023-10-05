@@ -1,6 +1,22 @@
 # HW 10
 
 from collections import UserDict
+import re 
+
+
+def normalize_phone(phone):
+    numbers = re.findall('\d+', str(phone))
+    phone = (''.join(numbers))
+    iterator = re.finditer(r"0[\d]+", phone)
+    if iterator:
+        for match in iterator:
+            phone = match.group()
+            if len(phone) == 10:
+                return phone
+        else:
+            print('value error phone')
+            raise ValueError
+
 
 # поля
 class Field:
@@ -18,8 +34,14 @@ class Name(Field):
 
 class Phone(Field):
     # реалізація класу 10 digit
-    # Реалізовано валідацію номера телефону(має бути 10 цифр).
-    ...
+
+    def __init__(self, value):
+        self.value = normalize_phone(value)
+    
+   
+
+
+
 
 
 class Record:
@@ -28,8 +50,9 @@ class Record:
         self.phones = []
 
 
-    def add_phone():
-        ...
+    def add_phone(self, phone = str):
+        self.phones.append(phone)
+        return self.phones
 
     def remove_phone():
         ...
@@ -41,23 +64,24 @@ class Record:
         ...
 
 
+    def __str__(self):
+        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
+
+
     # Реалізовано зберігання об'єкта Name в окремому атрибуті.
     # Реалізовано зберігання списку об'єктів Phone в окремому атрибуті.
     # Реалізовано методи для додавання - add_phone/видалення -
     # remove_phone/редагування - edit_phone/пошуку об'єктів Phone -
     # find_phone.
 
-    def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
-
-
 class AddressBook(UserDict):
+    # book = {}
     # реалізація класу
     # Додавання записів.
     # Пошук записів за іменем.
     # Видалення записів за іменем.
-    def add_record():
-        ...
+    def add_record(self, name = str):
+        self.data[name] = Record.add_phone
 
     def find():
         ...
