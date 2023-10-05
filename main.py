@@ -28,8 +28,10 @@ class Field:
 
 
 class Name(Field):
-    # реалізація класу
-    ...
+    def __init__(self, value):
+        self.name = value
+        # return self.name
+  
 
 
 class Phone(Field):
@@ -42,8 +44,6 @@ class Phone(Field):
 
 
 
-
-
 class Record:
     def __init__(self, name):
         self.name = Name(name)
@@ -52,7 +52,7 @@ class Record:
 
     def add_phone(self, phone = str):
         self.phones.append(phone)
-        return self.phones
+        AddressBook.add_record(self , self.name,   phone)
 
     def remove_phone():
         ...
@@ -75,13 +75,13 @@ class Record:
     # find_phone.
 
 class AddressBook(UserDict):
-    # book = {}
+    book = {}
     # реалізація класу
     # Додавання записів.
     # Пошук записів за іменем.
     # Видалення записів за іменем.
-    def add_record(self, name = str):
-        self.data[name] = Record.add_phone
+    def add_record(self, *args):
+        self.data[args[0]]= [args[1]]
 
     def find():
         ...
